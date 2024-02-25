@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Users :</title>
+</head>
+
+<body>
+
+<table>
+
+    <thead>
+    <tr>S.N</tr>
+    <tr>FIRSTNAME</tr>
+    <tr>LASTNAME</tr>
+    <tr>EMAIL</tr>
+    </thead>
+<tbody>
+<tr th:each="user,stat:${viewAllUser}">
+    <td th:text="${stat.index}">COUNT</td>
+    <td th:text="${user.firstName}">FIRSTNAME</td>
+    <td th:text="${user.lastName}">LASTNAME</td>
+    <td th:text="${user.email}">EMAIL</td>
+</tr>
+</tbody>
+
+</table>
+
+</body>
+
+</html>

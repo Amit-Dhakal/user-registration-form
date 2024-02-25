@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="fragments/navigation.html :: navbarFragment"></div>
+
+<form th:action="@{/register}" method="POST" th:object="${userDTO}">
+    <input type="text" th:field="*{firstName}" name="firstName" placeholder="FirstName">
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+        <input type="text" th:field="*{lastName}" name="lastName" placeholder="LastName">
+       <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+        <input type="password" th:field="*{password}" placeholder="Password">
+         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <input type="email" th:field="*{email}" placeholder="Email">
+         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <button type="submit">Register</button>
+</form>
+</body>
+</html>

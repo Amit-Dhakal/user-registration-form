@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <p>Welcome to login User</p>
+    <p th:text="${success}"> </p>
+
+    <style>
+        .login-button {
+            background-color: white; /* Set your initial background color here */
+        }
+        .login-failure {
+            background-color: red; /* Set the color for login failure here */
+        }
+    </style>
+
+
+</head>
+<body>
+    <form th:action="@{/login}" method="POST" th:object="${userDTO}">
+        <input type="email" th:field="*{email}" placeholder="Email">
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+        <input type="password" th:field="*{password}" placeholder="Password">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <button type="submit" class="login-button" onclick="updateColour()">Login</button>
+
+    </form>
+
+    <script th:inline="javascript">
+        var loginFailure = false;
+    </script>
+
+<script>
+    function updateColour(){
+        var button = document.querySelector(".login-button");
+
+        if (loginFailure) {
+            button.style.backgroundColor = "red";
+            // button.classList.add("login-failure");
+        } else {
+            button.style.backgroundColor = "green";
+            // button.classList.remove("login-failure");
+        }
+    }
+
+</script>
+
+</body>
+</html>
+
