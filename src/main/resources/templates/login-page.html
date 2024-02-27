@@ -5,13 +5,9 @@
     <title>Title</title>
     <p>Welcome to login User</p>
     <p th:text="${success}"> </p>
-
     <style>
         .login-button {
             background-color: white; /* Set your initial background color here */
-        }
-        .login-failure {
-            background-color: red; /* Set the color for login failure here */
         }
     </style>
 
@@ -24,27 +20,24 @@
         <input type="password" th:field="*{password}" placeholder="Password">
         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         <button type="submit" class="login-button" onclick="updateColour()">Login</button>
-
     </form>
+<!--    <script th:inline="javascript">-->
+<!--        var loginFailure = false;-->
+<!--    </script>-->
 
-    <script th:inline="javascript">
-        var loginFailure = false;
-    </script>
+<!--<script>-->
+<!--    function updateColour(){-->
+<!--        var button = document.querySelector(".login-button");-->
 
-<script>
-    function updateColour(){
-        var button = document.querySelector(".login-button");
-
-        if (loginFailure) {
-            button.style.backgroundColor = "red";
-            // button.classList.add("login-failure");
-        } else {
-            button.style.backgroundColor = "green";
-            // button.classList.remove("login-failure");
-        }
-    }
-
-</script>
+<!--        if (loginFailure) {-->
+<!--            button.style.backgroundColor = "red";-->
+<!--            // button.classList.add("login-failure");-->
+<!--        } else {-->
+<!--            button.style.backgroundColor = "green";-->
+<!--            // button.classList.remove("login-failure");-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 
 </body>
 </html>

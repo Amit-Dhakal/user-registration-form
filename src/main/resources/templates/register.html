@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width:300px; /* Adjust the maximum width as needed */
+        margin:auto;
+    }
+    input,button {
+        margin-bottom: 10px; /* Add margin between form elements */
+    }
+</style>
 </head>
 <body>
 
 <div th:replace="fragments/navigation.html :: navbarFragment"></div>
 
-<form th:action="@{/register}" method="POST" th:object="${userDTO}">
-    <input type="text" th:field="*{firstName}" name="firstName" placeholder="FirstName">
+<div class="form">
+
+    <form th:action="@{/register}" method="POST" th:object="${userDTO}">
+       <input type="text" th:field="*{firstName}" name="firstName" placeholder="FirstName">
         <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         <input type="text" th:field="*{lastName}" name="lastName" placeholder="LastName">
        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
@@ -18,6 +34,9 @@
         <input type="email" th:field="*{email}" placeholder="Email">
          <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
         <button type="submit">Register</button>
+
 </form>
+</div>
+
 </body>
 </html>

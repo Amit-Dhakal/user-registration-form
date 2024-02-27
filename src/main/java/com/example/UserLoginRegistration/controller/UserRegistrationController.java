@@ -44,21 +44,20 @@ public class UserRegistrationController {
             return "redirect:/error";
         }
         redirectAttributes.addFlashAttribute("success", "User saved successfully");
-        return "redirect:/login";
+        return "redirect:/login-page";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login-page")
     public String loginUser(Model model){
         model.addAttribute("userDTO",new UserDTO());
-        return "login";
+        return "login-page";
     }
 
-   @PostMapping("/login")
+   @PostMapping("/login-page")
     public String login(@ModelAttribute("userDTO") UserDTO userDTO,Model model){
        model.addAttribute("userDTO",userDTO);
        MapperService mapperService =new MapperService();
       List<User> listUser=userRepository.findAllByEmailAndPassword(userDTO.getEmail(),userDTO.getPassword());
-      System.out.println(listUser);
        Optional<List<User>> optionalUser=Optional.ofNullable(listUser);
        if(optionalUser.isPresent() && !optionalUser.get().isEmpty()){
            model.addAttribute("viewAllUser",listUser);
@@ -66,7 +65,7 @@ public class UserRegistrationController {
        }
        else {
            model.addAttribute("loginFailure", true);
-           return "redirect:/login";
+           return "redirect:/login-page";
        }
 
 }

@@ -25,7 +25,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize)-> authorize.requestMatchers("/h2-console/**").permitAll().
-                anyRequest().authenticated()).httpBasic(withDefaults()).formLogin(withDefaults()).csrf(AbstractHttpConfigurer::disable);
+                anyRequest().authenticated())
+                .formLogin(withDefaults())
+                .httpBasic(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable);
                 return http.build();
     }
     @Bean
@@ -37,13 +40,12 @@ public class SecurityConfig {
     }
     @Bean
     public EmbeddedDatabase datasource(){
-
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).setName("dashboard").addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION).build();
     }
 
     @Bean
     public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource,PasswordEncoder passwordEncoder){
-        UserDetails admin= User.builder().username("admin").password(passwordEncoder.encode("password")).roles("ADMIN").build();
+        UserDetails admin= User.builder().username("admin").password(passwordEncoder.encode("admin")).roles("ADMIN").build();
         JdbcUserDetailsManager jdbcUserDetailsManager=new JdbcUserDetailsManager(dataSource);
         jdbcUserDetailsManager.createUser(admin);
         return jdbcUserDetailsManager;
@@ -54,33 +56,10 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-//    @Bean
-//   public InMemoryUserDetailsManager users(){
-//        return new InMemoryUserDetailsManager(User.withUsername("amitdhakal").password("12345").roles("USERS").build());
-//    }
-//
-
-//    @Bean
-//    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource){
-//        JdbcUserDetailsManager jdbcUserDetailsManager=new JdbcUserDetailsManager(dataSource);
-//        return jdbcUserDetailsManager;
-//    }
-//
-
-//
-//    @Bean
-//    public UserDetailsService userDetailsService() throws Exception {
-//        UserDetails randomUser= User
-//                .withUsername("user")
-//                .password(passwordEncoder().encode("user"))
-//                .roles("USERS")
-//                .build();
-//        return new InMemoryUserDetailsManager(randomUser);
-//    }
-
-
 }
+
+
+
 
 
 //todo
@@ -93,7 +72,6 @@ public class SecurityConfig {
 //1.Password encrypt
 //2.Userdetails manager
 //security
-
 
 
 // 1 security filter chain
